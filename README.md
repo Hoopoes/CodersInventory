@@ -1,2 +1,2 @@
 # CodersInventory
-An Open Source Community for Code Snippets
+An Open-Source Inventory for Code Snippets
