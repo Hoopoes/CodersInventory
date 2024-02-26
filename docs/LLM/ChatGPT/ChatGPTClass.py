@@ -2,6 +2,7 @@ from enum import Enum
 from openai import OpenAI
 from openai.types import Completion
 from pydantic import BaseModel
+from typing import Union
 
 
 class ResponseType(str, Enum):
@@ -28,7 +29,7 @@ class GPTTokenLimit(Exception):
 class ChatGPT:
     
     def __init__(self, 
-                 api_key: str, 
+                 api_key: str | None = None, 
                  model: str = "gpt-3.5-turbo",
                  system_prompt: str = '',
                  max_tokens: int | None = None,
@@ -42,44 +43,52 @@ class ChatGPT:
         self.token_usage: int = 0
         self.message_list: list[MessageSchema] = [MessageSchema(role=Role.system, content=system_prompt)]
 
+    def _mapper(self, message: str | list[MessageSchema] | list[dict]) -> list[MessageSchema]:
+        message_list: list[MessageSchema] = []
+        if isinstance(message, str):
+            send: MessageSchema = MessageSchema(role=Role.user, content=message)
+            message_list = self.message_list[:]
+            message_list.append(send)
+        elif isinstance(message, list):
+            if len(message) > 0 and isinstance(message[0], MessageSchema):
+                message_list = message[:]
+            else:
+                for item in message:
+                    if isinstance(item, dict):
+                        message_list.append(MessageSchema(role=item.get('role'), content=item.get('content')))
+                    else:
+                        message_list.append(MessageSchema(role=item.role, content=item.content))
+        return message_list
 
-    def _chat(self, message_list: list[MessageSchema]) -> Completion:
+
+    def _chat(self, message_list: list[MessageSchema], temperature: float | None = None) -> Completion:
         return self.client.chat.completions.create(
-            model=self.model, 
+            model=self.model,
             messages=message_list,
-            temperature=self.temperature,
+            temperature=self.temperature if temperature is None else temperature,
             max_tokens=self.max_tokens
-            )
+        )
 
     def chat(self,
              message: str | list[MessageSchema] | list[dict],
              response_type: ResponseType = ResponseType.message,
              history: bool = False,
-             system_prompt: str | None = None
-        ) -> MessageSchema | list[MessageSchema]:
+             system_prompt: str | None = None,
+             temperature: float | None = None
+             ) -> MessageSchema | list[MessageSchema]:
 
         if response_type not in ResponseType.__members__:
             raise ValueError("Invalid response type provided. Must be one of: message, completion_obj, message_list")
 
-        message_list: list[MessageSchema] 
-
-        if isinstance(message, str):
-            send: MessageSchema = MessageSchema(role=Role.user, content=message)
-            message_list = self.message_list.copy()
-            message_list.append(send)
-        elif isinstance(message, list):
-            try:
-                message_list = [MessageSchema(role=item.role, content=item.content) for item in message]
-            except AttributeError:
-                message_list = [MessageSchema.model_validate(item) for item in message]
-
-               
+        message_list: list[MessageSchema] = self._mapper(message)               
 
         if system_prompt is not None:
             if message_list[0].role == Role.system:
                 message_list[0].content = system_prompt
+            else:
+                message_list.insert(0, MessageSchema(role=Role.system, content=system_prompt))
 
-        response: Completion = self._chat(message_list=message_list)
+        response: Completion = self._chat(message_list=message_list, temperature=temperature)
         
         reply: MessageSchema = MessageSchema(role=Role.assistant, content=response.choices[0].message.content)
         self.token_usage += response.usage.total_tokens
@@ -93,7 +102,7 @@ class ChatGPT:
         message_list.append(reply)
 
         if history:
-            self.message_list = message_list.copy()
+            self.message_list = message_list[:]
             self.message_list.append(reply)
 
         if response_type == ResponseType.message:
@@ -102,3 +111,133 @@ class ChatGPT:
             return message_list
         elif response_type == ResponseType.completion_obj:
             return response
+        
+
+    def observer(self,
+                 message: str | list[MessageSchema] | list[dict],
+                 observer_prompt: str,
+                 role: Role | None = None,
+                ) -> MessageSchema | list[MessageSchema]:
+        
+        if role == Role.system.value:
+            raise ValueError("Role cannot be 'system' for observer method")
+        
+        message_list: list[MessageSchema] = self._mapper(message)
+    
+        required_message: str | list[MessageSchema] 
+        if role is not None:
+            for item in message_list[::-1]:
+                role = item.role
+                content = item.content   
+                if role == role:
+                    required_message = content
+                    break
+        else:
+            # whole chat in string
+            pass
+
+        return  self.chat(message=required_message,
+                          response_type=ResponseType.message,
+                          system_prompt=observer_prompt,
+                          temperature=0.0)
+    
+
+
+
+
+class ChatGPT:
+
+    def __init__(self,
+                 api_key: str | None = None,
+                 model: str = "gpt-3.5-turbo",
+                 system_prompt: str = '',
+                 max_tokens: int | None = None,
+                 temperature: float | None = None
+                 ) -> None:
+
+        self.client: OpenAI = OpenAI(api_key=api_key)
+        self.model = model
+        self.temperature = temperature
+        self.max_tokens = max_tokens
+        self.token_usage: int = 0
+        self.message_list: list[MessageSchema] = [MessageSchema(role=Role.system, content=system_prompt)]
+
+    def _create_message_list(self, messages) -> list[MessageSchema]:
+        if isinstance(messages, str):
+            return [MessageSchema(role=Role.user, content=messages)]
+        elif isinstance(messages, list):
+            if all(isinstance(item, MessageSchema) for item in messages):
+                return messages[:]
+            else:
+                return [MessageSchema(role=item['role'], content=item['content']) for item in messages]
+
+    def _chat(self, message_list: list[MessageSchema], temperature: float | None = None) -> Completion:
+        return self.client.chat.completions.create(
+            model=self.model,
+            messages=message_list,
+            temperature=self.temperature if temperature is None else temperature,
+            max_tokens=self.max_tokens
+        )
+
+    def chat(self,
+             message: str | list[MessageSchema] | list[dict],
+             response_type: ResponseType = ResponseType.message,
+             history: bool = False,
+             system_prompt: str | None = None,
+             temperature: float | None = None
+             ) -> MessageSchema | list[MessageSchema]:
+
+        if response_type not in ResponseType.__members__:
+            raise ValueError("Invalid response type provided. Must be one of: message, completion_obj, message_list")
+
+        message_list = self._create_message_list(message)
+
+        if system_prompt is not None:
+            if message_list[0].role == Role.system:
+                message_list[0].content = system_prompt
+            else:
+                message_list.insert(0, MessageSchema(role=Role.system, content=system_prompt))
+
+        response = self._chat(message_list=message_list, temperature=temperature)
+
+        reply = MessageSchema(role=Role.assistant, content=response.choices[0].message.content)
+        self.token_usage += response.usage.total_tokens
+
+        if ((self.max_tokens is not None) and (self.token_usage >= self.max_tokens)):
+            raise GPTTokenLimit()
+
+        if response.choices[0].finish_reason == GPTTokenLimit.finish_reason:
+            raise GPTTokenLimit()
+
+        message_list.append(reply)
+
+        if history:
+            self.message_list = message_list[:]
+            self.message_list.append(reply)
+
+        if response_type == ResponseType.message:
+            return reply
+        elif response_type == ResponseType.message_list:
+            return message_list
+        elif response_type == ResponseType.completion_obj:
+            return response
+
+    def observer(self,
+                 message: str | list[MessageSchema] | list[dict] | Completion,
+                 observer_prompt: str,
+                 role: Role | None = None
+                 ) -> MessageSchema | list[MessageSchema]:
+
+        if isinstance(message, Completion):
+            message = message.choices[0].message.content
+
+        if role is not None and role == Role.system:
+            raise ValueError("Role cannot be 'system' for observer method")
+
+
+        
+
+        return self.chat(message=message,
+                         response_type=ResponseType.message,
+                         system_prompt=observer_prompt,
+                         temperature=0.0)
