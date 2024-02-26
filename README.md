@@ -1,4 +1,4 @@
-# CoderInventory
+# CodersInventory
 
 CoderInventory is an open-source inventory project aimed at providing coders with a curated collection of custom and useful code snippets for various programming tasks. The project focuses on offering snippets that are not commonly found on the internet or in libraries, allowing users to quickly copy and customize them for their projects.
 
