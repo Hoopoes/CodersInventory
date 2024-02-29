@@ -2,8 +2,6 @@ from enum import Enum
 from openai import OpenAI
 from openai.types import Completion
 from pydantic import BaseModel
-from typing import Union
-
 
 class ResponseType(str, Enum):
     message = 'message'
@@ -42,12 +40,12 @@ class ChatGPT:
         self.max_tokens = max_tokens
         self.token_usage: int = 0
         self.message_list: list[MessageSchema] = [MessageSchema(role=Role.system, content=system_prompt)]
-
-    def _mapper(self, message: str | list[MessageSchema] | list[dict]) -> list[MessageSchema]:
+    
+    @staticmethod
+    def mapper(message: str | list[MessageSchema] | list[dict]) -> list[MessageSchema]:
         message_list: list[MessageSchema] = []
         if isinstance(message, str):
             send: MessageSchema = MessageSchema(role=Role.user, content=message)
-            message_list = self.message_list[:]
             message_list.append(send)
         elif isinstance(message, list):
             if len(message) > 0 and isinstance(message[0], MessageSchema):
@@ -59,7 +57,6 @@ class ChatGPT:
                     else:
                         message_list.append(MessageSchema(role=item.role, content=item.content))
         return message_list
-
 
     def _chat(self, message_list: list[MessageSchema], temperature: float | None = None) -> Completion:
         return self.client.chat.completions.create(
@@ -80,7 +77,10 @@ class ChatGPT:
         if response_type not in ResponseType.__members__:
             raise ValueError("Invalid response type provided. Must be one of: message, completion_obj, message_list")
 
-        message_list: list[MessageSchema] = self._mapper(message)               
+        message_list: list[MessageSchema] = ChatGPT.mapper(message)
+
+        if history:
+            message_list[:0] = self.message_list      
 
         if system_prompt is not None:
             if message_list[0].role == Role.system:
@@ -103,7 +103,6 @@ class ChatGPT:
 
         if history:
             self.message_list = message_list[:]
-            self.message_list.append(reply)
 
         if response_type == ResponseType.message:
             return reply
@@ -111,30 +110,41 @@ class ChatGPT:
             return message_list
         elif response_type == ResponseType.completion_obj:
             return response
-        
 
+    @staticmethod    
+    def message_to_str(message: list[MessageSchema], 
+                    role: Role | None = None) -> str:
+        result: str = ""
+        roles: list[Role] = [Role.assistant, Role.user]
+        i: int
+        item: MessageSchema
+        for i, item in enumerate(message):
+            if role is None:
+                result += f"{roles[i%2].value}: {item.content}\n"
+            elif item.role == role:
+                result += f"{role}: {item.content}\n"
+        return result
+    
     def observer(self,
                  message: str | list[MessageSchema] | list[dict],
                  observer_prompt: str,
                  role: Role | None = None,
+                 from_last: bool = True,
                 ) -> MessageSchema | list[MessageSchema]:
         
         if role == Role.system.value:
             raise ValueError("Role cannot be 'system' for observer method")
         
-        message_list: list[MessageSchema] = self._mapper(message)
+        message_list: list[MessageSchema] = ChatGPT.mapper(message)
     
         required_message: str | list[MessageSchema] 
-        if role is not None:
-            for item in message_list[::-1]:
-                role = item.role
-                content = item.content   
-                if role == role:
-                    required_message = content
+        if from_last:
+            for item in message_list[::-1]:  
+                if role is None or item.role == role:
+                    required_message = item.content
                     break
         else:
-            # whole chat in string
-            pass
+            required_message = ChatGPT.message_to_str(message_list, role)
 
         return  self.chat(message=required_message,
                           response_type=ResponseType.message,
