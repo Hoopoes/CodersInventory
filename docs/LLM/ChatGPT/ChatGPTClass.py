@@ -7,6 +7,7 @@ class ResponseType(str, Enum):
     message = 'message'
     completion_obj = 'completion_obj'
     message_list = 'message_list'
+    json = 'json'
 
 class Role(str, Enum):
     system = "system"
@@ -48,31 +49,35 @@ class ChatGPT:
             send: MessageSchema = MessageSchema(role=Role.user, content=message)
             message_list.append(send)
         elif isinstance(message, list):
-            if len(message) > 0 and isinstance(message[0], MessageSchema):
-                message_list = message[:]
-            else:
-                for item in message:
-                    if isinstance(item, dict):
-                        message_list.append(MessageSchema(role=item.get('role'), content=item.get('content')))
-                    else:
-                        message_list.append(MessageSchema(role=item.role, content=item.content))
+            for item in message:
+                if isinstance(item, MessageSchema):
+                    message_list.append(item)
+                elif isinstance(item, dict):
+                    message_list.append(MessageSchema(role=item.get('role'), content=item.get('content')))
+                else:
+                    message_list.append(MessageSchema(role=item.role, content=item.content))
         return message_list
 
-    def _chat(self, message_list: list[MessageSchema], temperature: float | None = None) -> Completion:
+    def _chat(self, 
+              message_list: list[MessageSchema], 
+              temperature: float | None = None, 
+              response_format: dict[str,str] | None = None) -> Completion:
+        
         return self.client.chat.completions.create(
             model=self.model,
             messages=message_list,
             temperature=self.temperature if temperature is None else temperature,
-            max_tokens=self.max_tokens
+            max_tokens=self.max_tokens,
+            response_format=response_format
         )
 
     def chat(self,
              message: str | list[MessageSchema] | list[dict],
              response_type: ResponseType = ResponseType.message,
              history: bool = False,
+             response_format: dict[str,str] | None = None,
              system_prompt: str | None = None,
-             temperature: float | None = None
-             ) -> MessageSchema | list[MessageSchema]:
+             temperature: float | None = None) -> MessageSchema | list[MessageSchema]:
 
         if response_type not in ResponseType.__members__:
             raise ValueError("Invalid response type provided. Must be one of: message, completion_obj, message_list")
@@ -88,7 +93,7 @@ class ChatGPT:
             else:
                 message_list.insert(0, MessageSchema(role=Role.system, content=system_prompt))
 
-        response: Completion = self._chat(message_list=message_list, temperature=temperature)
+        response: Completion = self._chat(message_list=message_list, temperature=temperature, response_format=response_format)
         
         reply: MessageSchema = MessageSchema(role=Role.assistant, content=response.choices[0].message.content)
         self.token_usage += response.usage.total_tokens
@@ -110,6 +115,13 @@ class ChatGPT:
             return message_list
         elif response_type == ResponseType.completion_obj:
             return response
+        elif response_type == ResponseType.json:
+            json_list: list[dict] = [message.model_dump() for message in message_list]
+            i: int
+            for i, item in enumerate(json_list):
+                item['role'] = item['role'].value
+                json_list[i] = item 
+            return json_list
 
     @staticmethod    
     def message_to_str(message: list[MessageSchema], 
@@ -128,11 +140,11 @@ class ChatGPT:
     def observer(self,
                  message: str | list[MessageSchema] | list[dict],
                  observer_prompt: str,
-                 role: Role | None = None,
+                 role: Role | str | None = None,
                  from_last: bool = True,
-                ) -> MessageSchema | list[MessageSchema]:
+                ) -> MessageSchema:
         
-        if role == Role.system.value:
+        if role == Role.system or role == Role.system.value:
             raise ValueError("Role cannot be 'system' for observer method")
         
         message_list: list[MessageSchema] = ChatGPT.mapper(message)
