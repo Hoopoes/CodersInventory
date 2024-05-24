@@ -1,5 +1,6 @@
 from enum import Enum
-from openai import OpenAI
+from typing import Literal, Optional
+from openai import AsyncOpenAI
 from openai.types import Completion
 from pydantic import BaseModel
 
@@ -35,7 +36,7 @@ class ChatGPT:
                  temperature: float | None = None
             ) -> None:
         
-        self.client: OpenAI = OpenAI(api_key=api_key)
+        self.client: AsyncOpenAI = AsyncOpenAI(api_key=api_key)
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -58,34 +59,35 @@ class ChatGPT:
                     message_list.append(MessageSchema(role=item.role, content=item.content))
         return message_list
 
-    def _chat(self, 
+    async def _chat(self, 
               message_list: list[MessageSchema], 
               temperature: float | None = None, 
-              response_format: dict[str,str] | None = None) -> Completion:
+              response_format: dict[str,str] | None = None,
+              model: str | None = None) -> Completion:
         
-        return self.client.chat.completions.create(
-            model=self.model,
+        return await self.client.chat.completions.create(
+            model=self.model if model is None else model,
             messages=message_list,
             temperature=self.temperature if temperature is None else temperature,
             max_tokens=self.max_tokens,
             response_format=response_format
         )
 
-    def chat(self,
-             message: str | list[MessageSchema] | list[dict],
+    async def chat(self,
+             message: Optional[str | list[MessageSchema] | list[dict]] = None,
              response_type: ResponseType = ResponseType.message,
-             history: bool = False,
-             response_format: dict[str,str] | None = None,
-             system_prompt: str | None = None,
-             temperature: float | None = None) -> MessageSchema | list[MessageSchema]:
+             response_format: Optional[dict[Literal["type"], Literal["json", "text"]]]= None,
+             system_prompt: Optional[str] = None,
+             temperature: Optional[float] = None,
+             model: Optional[str] = None) -> MessageSchema | list[MessageSchema]:
 
         if response_type not in ResponseType.__members__:
             raise ValueError("Invalid response type provided. Must be one of: message, completion_obj, message_list")
 
-        message_list: list[MessageSchema] = ChatGPT.mapper(message)
-
-        if history:
-            message_list[:0] = self.message_list      
+        if message is not None:
+            message_list: list[MessageSchema] = ChatGPT.mapper(message)
+        else:
+            message_list: list[MessageSchema] = [MessageSchema(role=Role.system, content="")]  
 
         if system_prompt is not None:
             if message_list[0].role == Role.system:
@@ -93,7 +95,7 @@ class ChatGPT:
             else:
                 message_list.insert(0, MessageSchema(role=Role.system, content=system_prompt))
 
-        response: Completion = self._chat(message_list=message_list, temperature=temperature, response_format=response_format)
+        response: Completion = await self._chat(message_list=message_list, temperature=temperature, response_format=response_format, model=model)
         
         reply: MessageSchema = MessageSchema(role=Role.assistant, content=response.choices[0].message.content)
         self.token_usage += response.usage.total_tokens
@@ -105,9 +107,6 @@ class ChatGPT:
             raise GPTTokenLimit()
 
         message_list.append(reply)
-
-        if history:
-            self.message_list = message_list[:]
 
         if response_type == ResponseType.message:
             return reply
@@ -127,7 +126,7 @@ class ChatGPT:
     def message_to_str(message: list[MessageSchema], 
                     role: Role | None = None) -> str:
         result: str = ""
-        roles: list[Role] = [Role.assistant, Role.user]
+        roles: list[Role] = [Role.user, Role.assistant]
         i: int
         item: MessageSchema
         for i, item in enumerate(message):
@@ -137,7 +136,7 @@ class ChatGPT:
                 result += f"{role}: {item.content}\n"
         return result
     
-    def observer(self,
+    async def observer(self,
                  message: str | list[MessageSchema] | list[dict],
                  observer_prompt: str,
                  role: Role | str | None = None,
@@ -158,7 +157,8 @@ class ChatGPT:
         else:
             required_message = ChatGPT.message_to_str(message_list, role)
 
-        return  self.chat(message=required_message,
+        return  await self.chat(message=required_message,
                           response_type=ResponseType.message,
                           system_prompt=observer_prompt,
-                          temperature=0.0)
+                          temperature=0.0,
+                          model="gpt-3.5-turbo")
