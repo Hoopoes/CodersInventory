@@ -5,8 +5,12 @@ Prsima Guide for Python [Prisma Client Python](https://prisma-client-py.readthed
 - create .env file in prisma folder
 `DATABASE_URL=postgresql://user_name:password@localhost:5432/database_name`
 
-- add schema.prisma file in it
+- create schema.prisma file in it
+
+
 ```prisma
+// prisma/schema.prisma
+
 generator client {
     provider             = "prisma-client-py"
     interface            = "sync"
@@ -31,6 +35,9 @@ model Image {
 ```
 - run `prisma migrate dev --name "add_pgvector_extension"` or any other name in quotation.
 - Then Convert embedding datatype to String? because due to unsupported yet, prisma would get error. (AS when data comes from dtabase, prisma faild to parse it)
+
+
+
 ```prisma
 model Image {
     p_id       Int         @id @default(autoincrement()) @map("_id")
@@ -42,13 +49,33 @@ model Image {
 - then run `prisma generate` and for any change in schema run `prisma generate`.
 
 
+
+
+
+
+
+
+
+
+
 # Queries Database Using Prisma
 ```python
-```py
 from prisma import Prisma
 prisma_client = Prisma()
 ```
-As I have used `interface="sync"` in generator client in schema.prisma that's why i dont have to use aysnc/await but if i have used `asyncio` as interface then i would use async/await.
+As I have used `interface="sync"` in generator client in schema.prisma that's why i don't have to use aysnc/await but if i have used `asyncio` as interface then i would use async/await.
+
+
+
+
+
+
+
+
+
+
+
+
 # Insert Query
 ```py
 prisma_client.connect()
@@ -67,7 +94,15 @@ print(result) # empty string
 prisma_client.disconnect()
 ```
 
-Yes we need to use Raw Queries sadly as vector isnt supported yet
+Yes we need to use Raw Queries sadly as vector isn't supported yet
+
+
+
+
+
+
+
+
 
 ## Retrive Vector Query
 ```python
@@ -96,6 +131,11 @@ query= "SELECT p_id, name, embedding::text FROM public.db WHERE db.name = 'umar'
     )
 ```
 
+
+
+
+
+
 # Fetch using Cosine Similarity Without the Indexing
 $$ 1 - cosine\ distance =\ \set{-1,1} $$
 -1 to 1. -1 is opposite, 1 is similar. 
@@ -120,7 +160,7 @@ FROM (
     FROM db
 ) AS subquery
 WHERE {column}  > {0.70}
-ORDER BY cosine_similarity DESC
+ORDER BY {column} DESC
 Limit {3};
 """
     )
@@ -139,3 +179,59 @@ FROM db
 WHERE (1 - (embedding <=> '[1,2,3,4]')) > 0.70;
 ```
 But here, no query way to like order them, yes we can put this like fetch by limit but no order by distance so subquery is needed
+
+
+
+
+
+
+
+
+
+
+# Rough
+```sql
+SELECT
+	SubQuery.embedding::float[]
+FROM
+	(
+		SELECT 
+			name,
+			REPLACE(REPLACE(embedding::text, '[', '{'), ']', '}') as embedding
+		FROM public.db
+		ORDER BY p_id ASC
+	) AS SubQuery
+```
+
+
+# For facial recognition fetch
+```sql
+SELECT 
+    subquery.name, 
+    subquery.similar_score 
+FROM (
+    SELECT 
+        name, 
+        1 - (embedding <=> '[1,2,3,4]') AS similar_score
+    FROM db
+) AS subquery
+JOIN (
+    SELECT 
+        name, 
+        MAX(1 - (embedding <=> '[1,2,3,4]')) AS max_score
+    FROM db
+    GROUP BY name
+) AS max_scores
+ON subquery.name = max_scores.name
+JOIN (
+    SELECT 
+        MODE() WITHIN GROUP (ORDER BY name) AS mode_name
+    FROM db
+) AS mode_name_table
+ON TRUE
+WHERE subquery.similar_score > 0.70 
+    AND subquery.similar_score = max_scores.max_score
+    AND subquery.name = mode_name_table.mode_name
+ORDER BY subquery.similar_score DESC
+LIMIT 1;
+```
