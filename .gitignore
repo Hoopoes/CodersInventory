@@ -1,4 +1,4 @@
 .env
 **__pycache__**
 *.ipynb
-main.py
+test_main.py
