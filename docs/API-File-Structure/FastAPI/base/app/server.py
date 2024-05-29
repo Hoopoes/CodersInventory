@@ -63,15 +63,15 @@ app = create_app()
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
-    start_time = time.time()
+    start_time = time.monotonic()
     response = await call_next(request)
-    process_time = time.time() - start_time
+    process_time = time.monotonic() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     
     # Log additional information
-    api_type = request.scope.get("type", "Unknown")
+    # api_type = request.scope.get("type", "Unknown")
     route = request.scope.get("path", "Unknown")
     http_method = request.method
-    log.info(f"- {http_method} \"{route}\" Time Taken: {process_time:.2f} ms 🚀")
+    log.info(f"- {http_method} \"{route}\" Time Taken: {process_time:.2f} s 🚀")
     
     return response
