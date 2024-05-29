@@ -76,7 +76,7 @@ class ChatGPT:
     async def chat(self,
              message: Optional[str | list[MessageSchema] | list[dict]] = None,
              response_type: ResponseType = ResponseType.message,
-             response_format: Optional[dict[Literal["type"], Literal["json", "text"]]]= None,
+             response_format: Optional[dict[Literal["type"], Literal["json_object", "text"]]]= None,
              system_prompt: Optional[str] = None,
              temperature: Optional[float] = None,
              model: Optional[str] = None) -> MessageSchema | list[MessageSchema]:
