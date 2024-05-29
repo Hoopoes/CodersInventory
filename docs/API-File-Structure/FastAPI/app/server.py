@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     app_ = FastAPI(
         title=Config.app_name,
-        description="",
+        description=Config.description,
         version="1.0.0",
         middleware=make_middleware(),
         lifespan=lifespan,
