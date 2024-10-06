@@ -1,4 +1,11 @@
+# Poetry
+.venv
+poetry.lock
+
+# Private files
 .env
+
+# Python cache
 **__pycache__**
-*.ipynb
+
 test_main.py

@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "Fine-tune-gpt-2"
+version = "0.1.0"
+description = "Fine tuning code"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+# [[tool.poetry.source]]
+# name = "pytorch-src"
+# url = "https://download.pytorch.org/whl/cpu"
+# priority = "explicit"
+
+[[tool.poetry.source]]
+name = "pytorch-src"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
+
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+torch = {version = "2.3.1+cu121", source = "pytorch-src"}
+# torch = {version = "^2.3.1+cpu", source = "pytorch-src"}
+transformers = {extras = ["torch"], version = "^4.44.2"}
+ipykernel = "^6.29.3"
+peft = "^0.13.0"
+datasets = "^3.0.1"
+numpy = "1.26.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

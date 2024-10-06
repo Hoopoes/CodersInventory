@@ -1,0 +1,9 @@
+# Model files
+*.pt
+models/**/*.xml
+models/**/*.bin
+models/**/*.yaml
+models/*.onnx
+
+# Visual Studio Code
+.vscode/
