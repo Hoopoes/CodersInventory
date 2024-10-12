@@ -4,6 +4,11 @@ models/**/*.xml
 models/**/*.bin
 models/**/*.yaml
 models/*.onnx
+models/models--openai-community--gpt2
+outputs/
+
+# Dataset
+data/data_eng.json
 
 # Visual Studio Code
 .vscode/
