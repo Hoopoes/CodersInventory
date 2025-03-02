@@ -91,9 +91,10 @@ extra_javascript:
 
 
 nav:
-  - Home: 
-    - About: index.md
-    - MkDocs Formatting Guide: mkdocs-formatting-guide.md
+  - Home: index.md
+  - Documentation:
+    - Markdown Guide:
+      - MkDocs Formatting: root/markdown/mkdocs-formatting-guide.md
     # - Functional Validator:
       # - Pydantic: root/functional_validator/pydantic.md
   # - User Guide:
