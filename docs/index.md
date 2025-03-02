@@ -38,8 +38,6 @@ Supported Languages:
 
 ## 🌍 How to Use
 
-Visit **[CodersInventory](https://codersinventory.com)** to:
-
 - Browse **curated snippets** for different languages and use cases.
 - Copy and **integrate** them into your projects instantly.
 - Contribute by **adding your own snippets** to help others!
