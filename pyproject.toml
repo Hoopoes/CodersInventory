@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "CodersInventory"
+version = "1.0.0"
+description = "An Open Source Community for Code Snippets"
+authors = [
+    "Muhammad Umar Anzar <omer.anzar2@gmail.com>",
+    "Mubashir Ahmed Siddiqui <mubashirsidiki@gmail.com>",
+]
+
+readme = "README.md"
+package-mode = false
+
+[[tool.poetry.source]]
+name = "pypi"
+priority = "primary"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+mkdocs-material = "^9.5.49"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
