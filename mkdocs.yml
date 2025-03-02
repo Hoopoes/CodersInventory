@@ -1,0 +1,103 @@
+site_url: https://hoopoes.github.io/CodersInventory
+site_dir: build/site
+site_name: CodersInventory
+site_description: An Open Source Community for Code Snippets
+site_author: Muhammad Umar Anzar & Mubashir Ahmed Siddiqui
+
+repo_name: Hoopoes/CodersInventor
+repo_url: https://github.com/Hoopoes/CodersInventory
+
+copyright: |
+  &copy; 2025 <a href="https://github.com/Hoopoes" target="_blank" rel="noopener">Hoopes</a>. Created by <a href="https://github.com/umar-anzar" target="_blank" rel="noopener">Muhammad Umar Anzar</a> and <a href="https://github.com/mubashirsidiki" target="_blank" rel="noopener">Mubashir Ahmed Siddiqui</a>. All rights reserved.
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/nVYeNaPFPK
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/company/hoopoes-opensource
+
+
+strict: true
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    # - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.annotate
+    - content.code.copy
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+      primary: teal
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode    
+      primary: teal
+      accent: lime
+  plugins:
+  - social
+  - search
+  icon:
+    annotation: material/arrow-right-circle
+
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  
+
+extra_css:
+  - scripts/stylesheets/extra.css
+
+extra_javascript:
+  - scripts/javascripts/extra.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+
+
+
+
+nav:
+  - Home: 
+    - About: index.md
+    - MkDocs Formatting Guide: mkdocs-formatting-guide.md
+    # - Functional Validator:
+      # - Pydantic: root/functional_validator/pydantic.md
+  # - User Guide:
+  #   - Writing your docs: llm/gpt2.md
+  #   - Styling your docs: llm/llm.md
+  # - End:
+  #   - bye: pagae_2.md
