@@ -1,4 +1,4 @@
-## Headings
+## 📝 Headings
 Use `#` symbols to create headings of different levels.
 ```md
 # H1 Heading
@@ -15,7 +15,7 @@ Use `#` symbols to create headings of different levels.
 
 
 
-## Text Formatting  
+## ✍️ Text Formatting  
 Style text using bold, italic, strikethrough, or a combination.
 ```md
 **Bold Text**  
@@ -37,7 +37,7 @@ Style text using bold, italic, strikethrough, or a combination.
 
 
 
-## Lists  
+## 📋 Lists  
 
 ### Unordered List  
 Create bulleted lists using `-` or `*`.
@@ -77,7 +77,7 @@ Use numbers for ordered lists.
 
 
 
-## Blockquotes  
+## 💬 Blockquotes  
 Use `>` to create blockquotes for emphasis or citations.
 ```md
 > This is a blockquote.  
@@ -95,7 +95,7 @@ Use `>` to create blockquotes for emphasis or citations.
 
 
 
-## Horizontal Rule/Line
+## ➖ Horizontal Rule/Line
 Use `---`, `***`, or `___` to insert a horizontal line.
 ```md
 ---
@@ -115,7 +115,7 @@ ___
 
 
 
-## Links  
+## 🔗 Links  
 Create clickable hyperlinks using `[text](URL)`.
 ```md
 [Visit MkDocs](https://www.mkdocs.org)
@@ -131,7 +131,7 @@ Create clickable hyperlinks using `[text](URL)`.
 
 
 
-## Images
+## 🖼️ Images
 Embed images using `![Alt Text](Image URL)`.
 ```md
 ![Alt Text](https://via.placeholder.com/150)
@@ -147,7 +147,7 @@ Embed images using `![Alt Text](Image URL)`.
 
 
 
-## Tables
+## 📊 Tables
 Organize data using pipes `|` and hyphens `-`.
 ```md
 | Name  | Age |  Country |
@@ -169,7 +169,7 @@ Organize data using pipes `|` and hyphens `-`.
 
 
 
-## Code Blocks  
+## 💻 Code Blocks  
 
 ### Basic Code Block
 Wrap code snippets inside triple backticks.
@@ -285,7 +285,7 @@ Use `print("Hello, World!")` inside a sentence.
 
 
 
-## Code Annotation
+## 🏷️ Code Annotation
 
 ```
     ```python
@@ -330,7 +330,7 @@ Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
 
 
 
-## Admonitions (Notes, Warnings, Tips)  
+## ⚠️ Admonitions (Notes, Warnings, Tips)  
 Use `!!!` for special alert boxes like notes, warnings, and tips.
 ```md
 !!! note
@@ -366,7 +366,7 @@ Use `!!!` for special alert boxes like notes, warnings, and tips.
 
 
 
-## Expandable Code Blocks (Collapsible Sections)  
+## 📂 Expandable Code Blocks (Collapsible Sections)  
 
 ### Basic Collapsible Code Block
 Use `???+` to create expandable sections.
@@ -436,7 +436,7 @@ Combine text and collapsible code blocks for better explanation.
 
 
 
-## Task Lists
+## ✅ Task Lists
 Create interactive task lists with `[ ]` for incomplete and `[x]` for completed tasks.
 ```md
 - [x] Task 1
@@ -456,7 +456,7 @@ Create interactive task lists with `[ ]` for incomplete and `[x]` for completed 
 
 
 
-## Math Equations (LaTeX)  
+## 🔢 Math Equations (LaTeX)  
 Use LaTeX syntax within `$$` to display mathematical equations.
 ```md
 $$
@@ -476,7 +476,7 @@ $$
 
 
 
-## Emojis (If Supported)
+## 😀 Emojis (If Supported)
 Insert emojis using Unicode characters.
 ```md
 🚀 🎉 🔥

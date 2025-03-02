@@ -25,11 +25,13 @@ strict: true
 theme:
   name: material
   language: en
+  logo: https://cdn-icons-png.flaticon.com/512/12141/12141658.png
+  favicon: https://cdn-icons-png.flaticon.com/64/12141/12141658.png
   features:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
-    # - toc.integrate
+    # - toc.integrate # commenting this result toc placed on right hand side
     - navigation.top
     - search.suggest
     - search.highlight
@@ -42,13 +44,13 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-      primary: teal
+      primary: blue
       accent: purple 
     - scheme: slate 
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode    
-      primary: teal
+      primary: deep orange
       accent: lime
   plugins:
   - social
@@ -92,9 +94,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Documentation:
-    - Markdown Guide:
-      - MkDocs Formatting: root/markdown/mkdocs-formatting-guide.md
+  - Documentation Guide:
+    - MkDocs Formatting: root/markdown/mkdocs-formatting-guide.md
     # - Functional Validator:
       # - Pydantic: root/functional_validator/pydantic.md
   # - User Guide:
