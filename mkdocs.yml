@@ -23,6 +23,7 @@ extra:
 strict: true
 
 theme:
+  custom_dir: overrides
   name: material
   language: en
   logo: https://cdn-icons-png.flaticon.com/512/12141/12141658.png
@@ -34,6 +35,7 @@ theme:
     # - toc.integrate # commenting this result toc placed on right hand side
     - navigation.top
     - search.suggest
+    - search.share
     - search.highlight
     - content.tabs.link
     - content.code.annotation
