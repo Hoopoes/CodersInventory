@@ -97,9 +97,10 @@ extra_javascript:
 nav:
   - Home: index.md
   - Documentation Guide:
-    - MkDocs Formatting: root/markdown/mkdocs-formatting-guide.md
-    # - Functional Validator:
-      # - Pydantic: root/functional_validator/pydantic.md
+    - MkDocs Formatting: root/documentation-guide/mkdocs.md
+  - Software Engineering:
+    - Functional Validator:
+      - Pydantic Validator: root/software-engineering/functional-validator/pydantic.md
   # - User Guide:
   #   - Writing your docs: llm/gpt2.md
   #   - Styling your docs: llm/llm.md

@@ -1,3 +1,18 @@
+A comprehensive guide to MkDocs formatting, covering essential Markdown syntax and features.
+
+
+
+
+<br>
+
+---
+
+<br>
+
+
+
+
+
 ## 📝 Headings
 Use `#` symbols to create headings of different levels.
 ```md
@@ -9,9 +24,17 @@ Use `#` symbols to create headings of different levels.
 ###### H6 Heading
 ```
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -31,9 +54,17 @@ Style text using bold, italic, strikethrough, or a combination.
 ~~Strikethrough~~  
 **_Bold & Italic_**  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -71,9 +102,17 @@ Use numbers for ordered lists.
     1. Sub-item  
     2. Sub-item  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -89,9 +128,17 @@ Use `>` to create blockquotes for emphasis or citations.
 > This is a blockquote.  
 > It can span multiple lines.  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -109,9 +156,17 @@ ___
 ***  
 ___  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -125,9 +180,17 @@ Create clickable hyperlinks using `[text](URL)`.
   
 [Visit MkDocs](https://www.mkdocs.org)  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -141,9 +204,17 @@ Embed images using `![Alt Text](Image URL)`.
   
 ![Alt Text](https://via.placeholder.com/150)  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -163,9 +234,17 @@ Organize data using pipes `|` and hyphens `-`.
 | Alice |  25 | USA     |  
 | Bob   |  30 | Canada  |  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -185,7 +264,9 @@ Wrap code snippets inside triple backticks.
 print("Hello, World!")
 ```
 
-### Code Block with Language Syntax Highlighting 
+<br>
+
+### With Language Syntax Highlighting 
 Specify the programming language for syntax highlighting.
 ```md
     ```python
@@ -201,7 +282,10 @@ def greet(name):
     return f"Hello, {name}!"
 ```
 
-### Code Block with Filename  
+<br>
+
+
+### With Filename  
 Label the code block with a filename.
 ```md
     ```python title="greet.py"
@@ -217,7 +301,10 @@ def greet(name):
     return f"Hello, {name}!"
 ```
 
-### Code Block with Line Numbers  
+<br>
+
+
+### With Line Numbers  
 Enable line numbers for better readability.
 ```md
     ```python linenums="1"
@@ -233,7 +320,10 @@ def greet(name):
     return f"Hello, {name}!"
 ```
 
-### Code Block with Highlighted Lines  
+<br>
+
+
+### With Highlighted Lines  
 Highlight specific lines in the code block.
 ```md
     ```python hl_lines="2 3"
@@ -251,7 +341,10 @@ def greet(name):
     return message  # Highlighted
 ```
 
-### Code Block with Line Numbers and Highlighted Lines  
+<br>
+
+
+### With Line Numbers and Highlighted Lines  
 ```md
     ```python linenums="1" hl_lines="2"
     def greet(name):
@@ -268,6 +361,8 @@ def greet(name):
     return message
 ```
 
+<br>
+
 
 ### Inline Code  
 Use backticks to insert inline code within text.
@@ -279,9 +374,17 @@ Use `print("Hello, World!")` inside a sentence.
   
 Use `print("Hello, World!")` inside a sentence.  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -324,9 +427,17 @@ Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
 1.  :man_raising_hand: I'm an annotation! I can contain `code`, __formatted
     text__, images, ... basically anything that can be expressed in Markdown.
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -360,9 +471,17 @@ Use `!!!` for special alert boxes like notes, warnings, and tips.
 !!! danger  
     This is a dangerous operation.  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -430,9 +549,17 @@ Combine text and collapsible code blocks for better explanation.
     
     This function takes a number and returns its square.
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -450,9 +577,17 @@ Create interactive task lists with `[ ]` for incomplete and `[x]` for completed 
 - [ ] Task 2  
 - [ ] Task 3  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -470,9 +605,17 @@ $$
 x = {-b \pm \sqrt{b^2-4ac} \over 2a}
 $$  
 
+
+
+
+
 <br>
 
 ---
+
+<br>
+
+
 
 
 
@@ -490,3 +633,6 @@ Insert emojis using Unicode characters.
 <br>
 
 ---
+
+<br>
+
