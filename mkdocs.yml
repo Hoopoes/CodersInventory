@@ -80,6 +80,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      title: Page contents
 
   
 
@@ -99,8 +101,8 @@ nav:
   - Documentation Guide:
     - MkDocs Formatting: root/documentation-guide/mkdocs.md
   - Software Engineering:
-    - Functional Validator:
-      - Pydantic Validator: root/software-engineering/functional-validator/pydantic.md
+    - Validation Patterns:
+      - Pydantic: root/software-engineering/validation-patterns/pydantic.md
   # - User Guide:
   #   - Writing your docs: llm/gpt2.md
   #   - Styling your docs: llm/llm.md
