@@ -98,8 +98,9 @@ nav:
   - Home: index.md
   - Documentation Guide:
     - MkDocs Formatting: root/documentation-guide/mkdocs.md
-    # - Functional Validator:
-      # - Pydantic: root/functional_validator/pydantic.md
+  - Software Engineering:
+    - Functional Validator:
+      - Pydantic Validator: root/software-engineering/functional_validator/pydantic.md
   # - User Guide:
   #   - Writing your docs: llm/gpt2.md
   #   - Styling your docs: llm/llm.md
