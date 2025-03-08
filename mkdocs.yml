@@ -33,8 +33,6 @@ theme:
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.top  # Keeps top bar but no tabs
-    - navigation.sidebar  # Enables sidebar with ☰ menu
-    - navigation.expand  # Expands sections automatically in sidebar
     # - toc.integrate # commenting this result toc placed on right hand side
     - search.suggest
     - search.share
@@ -49,12 +47,18 @@ theme:
         icon: material/weather-night
         name: Switch to dark mode
       primary: blue
-      accent: purple 
-    - scheme: slate 
+      accent: purple
+    - scheme: dimmed
+      toggle:
+        icon: material/weather-sunset
+        name: Switch to light mode
+      primary: deep orange
+      accent: purple
+    - scheme: slate
       toggle:
         icon: material/weather-sunny
-        name: Switch to light mode    
-      primary: deep orange
+        name: Switch to dimmed mode
+      primary: black
       accent: lime
   plugins:
   - social

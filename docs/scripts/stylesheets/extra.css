@@ -1,0 +1,14 @@
+[data-md-color-scheme="default"] {
+    --md-default-bg-color: #f0f0f0; /* Light grey background */
+  }
+
+[data-md-color-scheme="dimmed"] {
+    --md-default-bg-color: #fdf6e3; /* Solarized base3 */
+    /* --md-primary-bg-color: #fdf6e3; Solarized base3 */
+    /* --md-accent-fg-color: #2aa198;  Solarized cyan */
+    /* --md-accent-bg-color: #eee8d5;  Solarized base2 */
+    /* --md-default-fg-color: #657b83; Solarized base00 */
+    /* --md-code-fg-color: #839496;    Solarized base0 */
+    /* --md-code-bg-color: #073642;    Solarized base02 */
+  }
+  
