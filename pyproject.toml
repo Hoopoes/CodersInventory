@@ -16,7 +16,7 @@ priority = "primary"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
-mkdocs-material = "^9.5.49"
+mkdocs-material = "^9.6.7"
 
 
 [build-system]

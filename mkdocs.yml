@@ -32,8 +32,10 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
+    - navigation.top  # Keeps top bar but no tabs
+    - navigation.sidebar  # Enables sidebar with ☰ menu
+    - navigation.expand  # Expands sections automatically in sidebar
     # - toc.integrate # commenting this result toc placed on right hand side
-    - navigation.top
     - search.suggest
     - search.share
     - search.highlight
@@ -101,28 +103,29 @@ nav:
   - Documentation Guide:
     - MkDocs Formatting: root/documentation-guide/mkdocs.md
   - Code Snippets:
-    - Software Engineering:
-      - Validation Patterns:
-        - Pydantic: root/code-snippets/software-engineering/validation-patterns/pydantic.md
-  - Environment & Configurations:
+    - Validation Patterns:
+      - Pydantic: root/code-snippets/validation-patterns/pydantic.md
+  - Environment Configurations:
     - Poetry Python Toml Setup Packages:
       - Deep Learning:
-        - Torch: root/environment/deep-learning/torch.md
-        - TensorFlow: root/environment/deep-learning/tensorflow.md 
+        - Torch: root/environment-configurations/deep-learning/torch.md
+        - TensorFlow: root/environment-configurations/deep-learning/tensorflow.md 
       # - OCR: 
-      #   - PaddleOCR: root/environment/ocr/paddleocr.md
-      #   - EasyOCR: root/environment/ocr/easyocr.md
+      #   - PaddleOCR: root/environment-configurations/ocr/paddleocr.md
+      #   - EasyOCR: root/environment-configurations/ocr/easyocr.md
 
-    # - Machine Learning:
-  #     - LLM Fine-Tuning (FlanT5 + LoRA): machine-learning/llm-finetune.md
-  #     - YOLO Model Pruning: machine-learning/yolo-pruning.md
-  #   - Metrics & Utilities:
+  - Machine Learning:
+    - LLM Fine-Tuning:
+      - LoRA: 
+        - FlanT5: root/machine-Learning/llm-fine-tune/lora/flant5.md
+    # - YOLO Model Pruning: machine-learning/yolo-pruning.md
+  - Metrics & Utils: root/metrics-and-utilities/index.md
   #     - Cosine Similarity Metric: metrics/cosine-similarity.md
-  # - DevOps & Deployment:
+  - DevOps & Deployment: root/devops-and-deployment/index.md
   #     - Nginx Configuration: devops/nginx-config.md
   #     - Docker Multi-Instance Setup: devops/docker-multi-instance.md
   #     - TCP Proxy for Database: devops/tcp-proxy.md
-  # - Databases:
+  - Databases: root/databases/index.md
   #     - Postgres TS Vector Script: databases/ts-vector.md
 
   # - User Guide:
