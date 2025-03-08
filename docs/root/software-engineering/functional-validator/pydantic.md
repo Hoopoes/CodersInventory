@@ -1,4 +1,4 @@
-## Computed Fields
+## 🧮 Computed Fields
 
 Computed fields derive values dynamically at runtime using `@computed_field`. These fields **aren’t provided as input** but are **calculated from existing fields**. 
 
@@ -34,7 +34,7 @@ print(user.model_dump())
     Computed fields are **evaluated every time** they are accessed. This means that calling `user.username`, printing it, or dumping the model (`model_dump()`) will **recompute** the value dynamically. 
 
 
-## Field Validators
+## ✅ Field Validators
 
 Field validators **modify, validate, or transform** individual fields before assignment. They can run **before or after** field processing (`mode="before"` or `"after"`). 
 
@@ -104,7 +104,7 @@ print(user.model_dump())
 ```
 
 
-## Model Validators
+## 🧩 Model Validators
 
 Model validators enforce rules that involve **multiple fields**. They run **after all fields are validated**, ensuring cross-field constraints and dependencies are met.
 
