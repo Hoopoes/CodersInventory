@@ -105,6 +105,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - Docs & Markup:
+    - Markdown Formatting: root/docs-and-markup/markdown.md
     - MkDocs Formatting: root/docs-and-markup/mkdocs.md
   - Code Snippets:
     - Validation Patterns:
