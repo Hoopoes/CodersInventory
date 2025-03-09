@@ -25,6 +25,10 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
+      - name: Install system dependencies for image processing
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
       - run: pip install poetry  # Install Poetry
       - run: poetry install       # Install dependencies from poetry.lock
       - run: poetry run mkdocs gh-deploy --force  # Run mkdocs with Poetry

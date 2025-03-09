@@ -61,8 +61,10 @@ theme:
       primary: black
       accent: lime
   plugins:
-  - social
-  - search
+    - social
+    - search:
+      lang:
+        - en
   icon:
     annotation: material/arrow-right-circle
 
