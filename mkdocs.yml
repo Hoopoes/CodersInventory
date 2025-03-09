@@ -34,6 +34,7 @@ theme:
     - navigation.sections
     - navigation.top  # Keeps top bar but no tabs
     # - toc.integrate # commenting this result toc placed on right hand side
+    - navigation.tracking  # Required for dynamic social cards
     - search.suggest
     - search.share
     - search.highlight
