@@ -1,14 +1,96 @@
 [data-md-color-scheme="default"] {
-    --md-default-bg-color: #f0f0f0; /* Light grey background */
+    /* Light grey background */
+    --md-default-bg-color: #f0f0f0;
   }
 
-[data-md-color-scheme="dimmed"] {
-    --md-default-bg-color: #fdf6e3; /* Solarized base3 */
-    /* --md-primary-bg-color: #fdf6e3; Solarized base3 */
-    /* --md-accent-fg-color: #2aa198;  Solarized cyan */
-    /* --md-accent-bg-color: #eee8d5;  Solarized base2 */
-    /* --md-default-fg-color: #657b83; Solarized base00 */
-    /* --md-code-fg-color: #839496;    Solarized base0 */
-    /* --md-code-bg-color: #073642;    Solarized base02 */
+  
+  [data-md-color-scheme="dimmed"] {
+    /* Evening-inspired color palette */
+    --md-hue: 250; /* Adjusted hue for a more purplish tone */
+    --md-default-fg-color: hsla(var(--md-hue), 20%, 85%, 0.9); /* Light lavender for text */
+    --md-default-fg-color--light: hsla(var(--md-hue), 20%, 85%, 0.6);
+    --md-default-fg-color--lighter: hsla(var(--md-hue), 20%, 85%, 0.35);
+    --md-default-fg-color--lightest: hsla(var(--md-hue), 20%, 85%, 0.15);
+    --md-default-bg-color: hsla(var(--md-hue), 30%, 15%, 1); /* Deep indigo background */
+    --md-default-bg-color--light: hsla(var(--md-hue), 30%, 15%, 0.6);
+    --md-default-bg-color--lighter: hsla(var(--md-hue), 30%, 15%, 0.3);
+    --md-default-bg-color--lightest: hsla(var(--md-hue), 30%, 15%, 0.1);
+    --md-code-fg-color: hsla(var(--md-hue), 25%, 80%, 0.9); /* Soft violet for code text */
+    --md-code-bg-color: hsla(var(--md-hue), 30%, 20%, 1); /* Slightly lighter background for code blocks */
+    --md-code-hl-color: #FF4500; /* Bright orange for highlights */
+    --md-code-hl-color--light: #FF45001a;
+    --md-code-hl-number-color: #FFD700; /* Gold for numbers */
+    --md-code-hl-special-color: #FF69B4; /* Hot pink for special characters */
+    --md-code-hl-function-color: #BA55D3; /* Medium orchid for functions */
+    --md-code-hl-constant-color: #9370DB; /* Medium purple for constants */
+    --md-code-hl-keyword-color: #4682B4; /* Steel blue for keywords */
+    --md-code-hl-string-color: #32CD32; /* Lime green for strings */
+    --md-code-hl-name-color: var(--md-code-fg-color);
+    --md-code-hl-operator-color: var(--md-default-fg-color--light);
+    --md-code-hl-punctuation-color: var(--md-default-fg-color--light);
+    --md-code-hl-comment-color: var(--md-default-fg-color--light);
+    --md-code-hl-generic-color: var(--md-default-fg-color--light);
+    --md-code-hl-variable-color: var(--md-default-fg-color--light);
+    --md-typeset-color: var(--md-default-fg-color);
+    --md-typeset-a-color: #FF6347; /* Tomato color for links */
+    --md-typeset-kbd-color: hsla(var(--md-hue), 20%, 85%, 0.15);
+    --md-typeset-kbd-accent-color: hsla(var(--md-hue), 20%, 85%, 0.25);
+    --md-typeset-kbd-border-color: hsla(var(--md-hue), 30%, 15%, 1);
+    --md-typeset-mark-color: #FF45004d; /* Semi-transparent orange for marks */
+    --md-typeset-table-color: hsla(var(--md-hue), 20%, 90%, 0.15);
+    --md-typeset-table-color--light: hsla(var(--md-hue), 20%, 90%, 0.05);
+    --md-admonition-fg-color: var(--md-default-fg-color);
+    --md-admonition-bg-color: var(--md-default-bg-color);
+    --md-footer-bg-color: hsla(var(--md-hue), 30%, 10%, 0.9);
+    --md-footer-bg-color--dark: hsla(var(--md-hue), 30%, 8%, 1);
+    --md-shadow-z1: 0 0.2rem 0.5rem #0000000d, 0 0 0.05rem #0000001a;
+    --md-shadow-z2: 0 0.2rem 0.5rem #00000040, 0 0 0.05rem #00000040;
+    --md-shadow-z3: 0 0.2rem 0.5rem #0006, 0 0 0.05rem #00000059;
+    color-scheme: dark;
+}
+
+  
+
+
+/* Ensure the grid layout spans the full width of its container */
+.md-grid {
+  max-width: 98%;
+}
+
+/* Apply styles for screens wider than 1220px */
+@media (min-width: 1220px) {
+  /* Remove top margin from the main inner content area */
+  .md-main__inner {
+    margin-top: 0;
   }
   
+  /* Allow the sidebar's height to adjust automatically based on its content */
+  .md-sidebar {
+    height: auto;
+  }
+  
+  /* Add a right border to the primary sidebar using the lightest shade of the default foreground color */
+  .md-sidebar--primary {
+    border-right: 1px solid var(--md-default-fg-color--lightest);
+    
+    /* This is width of left nav bar. Remove this width if causing problem */
+    width: 14%; 
+  }
+  
+  /* Increase the font size of navigation links */
+  .md-nav {
+    font-size: 14px;
+  }
+  
+  /* Hide navigation titles */
+  /* .md-nav .md-nav__title {
+    display: none;
+  } */
+  
+  /* Adjust the size and vertical alignment of navigation icons */
+  .md-nav__icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: -0.1rem;
+  }
+}

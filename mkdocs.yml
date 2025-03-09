@@ -45,19 +45,19 @@ theme:
     - scheme: default
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
+        name: Switch to dimmed mode
       primary: blue
       accent: purple
     - scheme: dimmed
       toggle:
         icon: material/weather-sunset
-        name: Switch to light mode
+        name: Switch to dark mode
       primary: deep orange
-      accent: purple
+      accent: yellow
     - scheme: slate
       toggle:
         icon: material/weather-sunny
-        name: Switch to dimmed mode
+        name: Switch to light mode
       primary: black
       accent: lime
   plugins:
@@ -104,28 +104,29 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Documentation Guide:
-    - MkDocs Formatting: root/documentation-guide/mkdocs.md
+  - Docs & Markup:
+    - Markdown Formatting: root/docs-and-markup/markdown.md
+    - MkDocs Formatting: root/docs-and-markup/mkdocs.md
   - Code Snippets:
     - Validation Patterns:
       - Pydantic: root/code-snippets/validation-patterns/pydantic.md
-  - Environment Configurations:
-    - Poetry Python Toml Setup Packages:
+  - Environment:
+    - Setup Packages:
       - Deep Learning:
-        - Torch: root/environment-configurations/deep-learning/torch.md
-        - TensorFlow: root/environment-configurations/deep-learning/tensorflow.md 
+        - PyTorch with Poetry: root/environment/deep-learning/torch.md
+        - TensorFlow with Poetry: root/environment/deep-learning/tensorflow.md 
       # - OCR: 
-      #   - PaddleOCR: root/environment-configurations/ocr/paddleocr.md
-      #   - EasyOCR: root/environment-configurations/ocr/easyocr.md
+      #   - PaddleOCR: root/environment/ocr/paddleocr.md
+      #   - EasyOCR: root/environment/ocr/easyocr.md
 
   - Machine Learning:
     - LLM Fine-Tuning:
       - LoRA: 
         - FlanT5: root/machine-Learning/llm-fine-tune/lora/flant5.md
     # - YOLO Model Pruning: machine-learning/yolo-pruning.md
-  - Metrics & Utils: root/metrics-and-utilities/index.md
+  - Utilities: root/utilities/index.md
   #     - Cosine Similarity Metric: metrics/cosine-similarity.md
-  - DevOps & Deployment: root/devops-and-deployment/index.md
+  - DevOps: root/devops/index.md
   #     - Nginx Configuration: devops/nginx-config.md
   #     - Docker Multi-Instance Setup: devops/docker-multi-instance.md
   #     - TCP Proxy for Database: devops/tcp-proxy.md

@@ -117,7 +117,7 @@ Sometimes, a model has two optional fields, but **at least one must be provided*
 ???+ tip
     This is useful for ensuring users provide **either one type of input or another** but not both.
 
-```python linenums="1" hl_lines="8-14"
+```python linenums="1" hl_lines="8-12"
 from typing import Optional
 from pydantic import BaseModel, model_validator
 
@@ -128,9 +128,7 @@ class FooBarModel(BaseModel):
     @model_validator(mode="after")
     def validate_exclusive_fields(self):
         if (self.foo is None) == (self.bar is None):
-            raise ValueError(
-                "Either `foo` or `bar` must be provided, but not both."
-            )
+            raise ValueError("Either `foo` or `bar` must be provided, but not both.")
         return self
 
 # Example usage
