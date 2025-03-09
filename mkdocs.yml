@@ -111,10 +111,10 @@ nav:
     - Validation Patterns:
       - Pydantic: root/code-snippets/validation-patterns/pydantic.md
   - Environment:
-    - Poetry Python Toml Setup Packages:
+    - Setup Packages:
       - Deep Learning:
-        - Torch: root/environment/deep-learning/torch.md
-        - TensorFlow: root/environment/deep-learning/tensorflow.md 
+        - PyTorch with Poetry: root/environment/deep-learning/torch.md
+        - TensorFlow with Poetry: root/environment/deep-learning/tensorflow.md 
       # - OCR: 
       #   - PaddleOCR: root/environment/ocr/paddleocr.md
       #   - EasyOCR: root/environment/ocr/easyocr.md
