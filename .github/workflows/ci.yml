@@ -28,7 +28,7 @@ jobs:
       - name: Install system dependencies for image processing
         run: |
           sudo apt-get update
-          sudo apt-get install -y install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev pngquant
+          sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev pngquant
       - run: pip install poetry  # Install Poetry
       - run: poetry install       # Install dependencies from poetry.lock
       - run: poetry run mkdocs gh-deploy --force  # Run mkdocs with Poetry
