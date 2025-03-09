@@ -45,19 +45,19 @@ theme:
     - scheme: default
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
+        name: Switch to dimmed mode
       primary: blue
       accent: purple
     - scheme: dimmed
       toggle:
         icon: material/weather-sunset
-        name: Switch to light mode
+        name: Switch to dark mode
       primary: deep orange
-      accent: purple
+      accent: yellow
     - scheme: slate
       toggle:
         icon: material/weather-sunny
-        name: Switch to dimmed mode
+        name: Switch to light mode
       primary: black
       accent: lime
   plugins:
