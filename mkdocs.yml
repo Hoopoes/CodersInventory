@@ -42,25 +42,28 @@ theme:
     - content.code.annotation
     - content.code.annotate
     - content.code.copy
+  
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       toggle:
         icon: material/weather-night
         name: Switch to dimmed mode
       primary: blue
       accent: purple
-    - scheme: dimmed
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       toggle:
         icon: material/weather-sunset
-        name: Switch to dark mode
-      primary: deep orange
-      accent: yellow
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
         name: Switch to light mode
       primary: black
       accent: lime
+    - scheme: dimmed
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+      primary: deep orange
+      accent: yellow
   plugins:
     - social
     - search:
