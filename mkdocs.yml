@@ -85,6 +85,8 @@ markdown_extensions:
   - footnotes
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.mark
   - pymdownx.tilde
   - attr_list
@@ -130,7 +132,8 @@ nav:
       - LoRA: 
         - FlanT5: root/machine-Learning/llm-fine-tune/lora/flant5.md
     # - YOLO Model Pruning: machine-learning/yolo-pruning.md
-  - Utilities: root/utilities/index.md
+  - Utilities:
+    - Email Service: root/utilities/email-service.md
   #     - Cosine Similarity Metric: metrics/cosine-similarity.md
   - DevOps: root/devops/index.md
   #     - Nginx Configuration: devops/nginx-config.md
