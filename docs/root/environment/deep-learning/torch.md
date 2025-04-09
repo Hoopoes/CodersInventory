@@ -16,25 +16,20 @@ Before setting up this project, ensure you have a basic understanding of the fol
 
 Based on your hardware, update your `pyproject.toml` file with the appropriate configuration.
 
-=== "CPU Configuration `(pyproject.toml)`" 
+=== "CPU Configuration" 
 
     This configuration installs a version of PyTorch optimized for CPU usage.
 
 
-    ```toml
+    ```toml title="pyproject.toml"
     [project]
     name = "project-name"
     version = "0.1.0"
-    description = ""
-    authors = [
-        {name = "author-name", email = "author@email.com"}
-    ]
-    readme = "README.md"
     requires-python = ">=3.11,<3.12"
     dependencies = [
-        "torch (>=2.2.0,<3.0.0)",
-        "torchvision (>=0.17.0,<0.22.0)",
-        "torchaudio (>=2.2.0,<3.0.0)"
+        "torch (>=2.2.0)",
+        "torchvision (>=0.17.0)",
+        "torchaudio (>=2.2.0)"
     ]
 
     [[tool.poetry.source]]
@@ -55,25 +50,20 @@ Based on your hardware, update your `pyproject.toml` file with the appropriate c
     build-backend = "poetry.core.masonry.api"
     ```
 
-=== "GPU Configuration `(pyproject.toml)`" 
+=== "GPU Configuration" 
 
     This configuration is optimized for NVIDIA GPUs with CUDA support (CUDA 12.1).
 
 
-    ```toml
+    ```toml title="pyproject.toml"
     [project]
     name = "project-name"
     version = "0.1.0"
-    description = ""
-    authors = [
-        {name = "author-name", email = "author@email.com"}
-    ]
-    readme = "README.md"
     requires-python = ">=3.11,<3.12"
     dependencies = [
-        "torch (>=2.2.0,<3.0.0)",
-        "torchvision (>=0.17.0,<0.21.0)",
-        "torchaudio (>=2.2.0,<3.0.0)"
+        "torch (>=2.2.0)",
+        "torchvision (>=0.17.0)",
+        "torchaudio (>=2.2.0)"
     ]
 
     [[tool.poetry.source]]
@@ -96,8 +86,8 @@ Based on your hardware, update your `pyproject.toml` file with the appropriate c
 
 ???+ Warning
     - NumPy 2.0 may cause compatibility issues with older PyTorch & Python. If you experience problems, try specifying one of these NumPy versions in your dependencies:
-        - `numpy = "^1.26.4"` 
-        - `numpy = "^1.26.3"`
+        - `numpy = "1.26.4"` 
+        - `numpy = "1.26.3"`
 
 ???+ Note
     - If you need a different CUDA version (e.g., CUDA 11.8 or 12.0), update the `url` in the GPU configuration by checking the official [PyTorch Index](https://pytorch.org/get-started/locally/){:target="_blank" rel="noopener noreferrer"}.

@@ -16,32 +16,35 @@ Before setting up this project, ensure you have a basic understanding of the fol
 
 Based on your hardware, update your `pyproject.toml` file with the appropriate configuration.
 
-### CPU Configuration `(pyproject.toml)` on Windows/Linux
+=== "CPU Configuration on Windows/Linux"
 
-This configuration installs a version of Tensorflow optimized for CPU usage.
+    This configuration installs a version of Tensorflow optimized for CPU usage.
 
-```toml
-[tool.poetry]
-name = "project-name"
-version = "0.1.0"
-description = ""
-authors = ["author-name <author-email>"]
-readme = "README.md"
-package-mode = false
+    ```toml title="pyproject.toml"
+    [project]
+    name = "project-name"
+    version = "0.1.0"
+    requires-python = ">=3.11,<3.12"
+    dependencies = [
+        "tensorflow (>=2.18.0)",
+        "tensorflow-io-gcs-filesystem (==0.31.0)",
+        "tf-keras (>=2.18.0)",
+        "tensorflow-intel (>=2.18.0) ; sys_platform != 'linux'"
+    ]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.12"
-tensorflow = "^2.18.0"
-tf-keras = "^2.18.0"
-tensorflow-io-gcs-filesystem = "^0.31.0"
-tensorflow-intel = {version = "^2.18.0", markers = "sys_platform != 'linux'"}
+    [tool.poetry]
+    package-mode = false
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-```
+    [build-system]
+    requires = ["poetry-core>=2.0.0,<3.0.0"]
+    build-backend = "poetry.core.masonry.api"
+    ```
+
 ???+ Warning
     - TensorFlow no longer supports GPU acceleration on Windows.
+    - NumPy 2.0 may cause compatibility issues with older Tensorflow & Python. If you experience problems, try specifying one of these NumPy versions in your dependencies:
+        - `numpy = "1.26.4"` 
+        - `numpy = "1.26.3"`
 
 ???+ Note    
     - The configuration above is set up for Python versions between 3.11 (inclusive) and 3.12 (exclusive). Adjust the Python version in your `pyproject.toml` file if your project uses a different version.
