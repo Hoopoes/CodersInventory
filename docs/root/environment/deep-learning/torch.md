@@ -16,71 +16,86 @@ Before setting up this project, ensure you have a basic understanding of the fol
 
 Based on your hardware, update your `pyproject.toml` file with the appropriate configuration.
 
-### CPU Configuration `(pyproject.toml)`
+=== "CPU Configuration `(pyproject.toml)`" 
 
-This configuration installs a version of PyTorch optimized for CPU usage.
-
-
-```toml
-[tool.poetry]
-name = "project-name"
-version = "0.1.0"
-description = ""
-authors = ["author-name <author-email>"]
-readme = "README.md"
-package-mode = false
-
-[[tool.poetry.source]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-priority = "explicit"
-
-[tool.poetry.dependencies]
-python = ">=3.11,<3.12"
-torch = {version = "^2.2.0+cpu", source = "pytorch-cpu"}
-torchvision = {version = "^0.17.0+cpu", source = "pytorch-cpu"}
-torchaudio = {version = "^2.2.0+cpu", source = "pytorch-cpu"}
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-```
-
-### GPU Configuration `(pyproject.toml)`
-
-This configuration is optimized for NVIDIA GPUs with CUDA support (CUDA 12.1).
+    This configuration installs a version of PyTorch optimized for CPU usage.
 
 
-```toml
-[tool.poetry]
-name = "project-name"
-version = "0.1.0"
-description = ""
-authors = ["author-name <author-email>"]
-readme = "README.md"
-package-mode = false
+    ```toml
+    [project]
+    name = "project-name"
+    version = "0.1.0"
+    description = ""
+    authors = [
+        {name = "author-name", email = "author@email.com"}
+    ]
+    readme = "README.md"
+    requires-python = ">=3.11,<3.12"
+    dependencies = [
+        "torch (>=2.2.0,<3.0.0)",
+        "torchvision (>=0.17.0,<0.22.0)",
+        "torchaudio (>=2.2.0,<3.0.0)"
+    ]
+
+    [[tool.poetry.source]]
+    name = "pytorch-cpu"
+    url = "https://download.pytorch.org/whl/cpu"
+    priority = "explicit"
+
+    [tool.poetry.dependencies]
+    torch = {source = "pytorch-cpu"}
+    torchvision = {source = "pytorch-cpu"}
+    torchaudio = {source = "pytorch-cpu"}
+
+    [tool.poetry]
+    package-mode = false
+
+    [build-system]
+    requires = ["poetry-core>=2.0.0,<3.0.0"]
+    build-backend = "poetry.core.masonry.api"
+    ```
+
+=== "GPU Configuration `(pyproject.toml)`" 
+
+    This configuration is optimized for NVIDIA GPUs with CUDA support (CUDA 12.1).
 
 
-[[tool.poetry.source]]
-name = "pytorch-cu"
-url = "https://download.pytorch.org/whl/cu121"
-priority = "explicit"
+    ```toml
+    [project]
+    name = "project-name"
+    version = "0.1.0"
+    description = ""
+    authors = [
+        {name = "author-name", email = "author@email.com"}
+    ]
+    readme = "README.md"
+    requires-python = ">=3.11,<3.12"
+    dependencies = [
+        "torch (>=2.2.0,<3.0.0)",
+        "torchvision (>=0.17.0,<0.21.0)",
+        "torchaudio (>=2.2.0,<3.0.0)"
+    ]
 
+    [[tool.poetry.source]]
+    name = "pytorch-cu121"
+    url = "https://download.pytorch.org/whl/cu121"
+    priority = "explicit"
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.12"
-torch = {version = "^2.2.0+cu121", source = "pytorch-cu"}
-torchvision = {version = "^0.17.0+cu121", source = "pytorch-cu"}
-torchaudio = {version = "^2.2.0+cu121", source = "pytorch-cu"}
+    [tool.poetry.dependencies]
+    torch = {source = "pytorch-cu121"}
+    torchvision = {source = "pytorch-cu121"}
+    torchaudio = {source = "pytorch-cu121"}
 
+    [tool.poetry]
+    package-mode = false
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-```
+    [build-system]
+    requires = ["poetry-core>=2.0.0,<3.0.0"]
+    build-backend = "poetry.core.masonry.api"
+    ```
 
 ???+ Warning
-    - NumPy 2.0 may cause compatibility issues with older PyTorch models. If you experience problems, try specifying one of these NumPy versions in your dependencies:
+    - NumPy 2.0 may cause compatibility issues with older PyTorch & Python. If you experience problems, try specifying one of these NumPy versions in your dependencies:
         - `numpy = "^1.26.4"` 
         - `numpy = "^1.26.3"`
 
