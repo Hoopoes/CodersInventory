@@ -134,6 +134,7 @@ nav:
     # - YOLO Model Pruning: machine-learning/yolo-pruning.md
   - Utilities:
     - Email Service: root/utilities/email-service.md
+    - Cron Job with FastAPI Utils: root/utilities/cron-job.md
   #     - Cosine Similarity Metric: metrics/cosine-similarity.md
   - DevOps: root/devops/index.md
   #     - Nginx Configuration: devops/nginx-config.md
