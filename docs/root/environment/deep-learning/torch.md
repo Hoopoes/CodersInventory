@@ -20,6 +20,12 @@ Based on your hardware, update your `pyproject.toml` file with the appropriate c
 
     This configuration installs a version of PyTorch optimized for CPU usage.
 
+    ```bash
+    poetry source add --priority=explicit pytorch-cpu https://download.pytorch.org/whl/cpu
+    poetry add torch --source pytorch-cpu
+    poetry add torchvision --source pytorch-cpu
+    poetry add torchaudio --source pytorch-cpu
+    ```
 
     ```toml title="pyproject.toml"
     [project]
@@ -53,7 +59,13 @@ Based on your hardware, update your `pyproject.toml` file with the appropriate c
 === "GPU Configuration" 
 
     This configuration is optimized for NVIDIA GPUs with CUDA support (CUDA 12.1).
-
+    
+    ```bash
+    poetry source add --priority=explicit pytorch-cu121 https://download.pytorch.org/whl/cu121
+    poetry add torch --source pytorch-cu121
+    poetry add torchvision --source pytorch-cu121
+    poetry add torchaudio --source pytorch-cu121
+    ```
 
     ```toml title="pyproject.toml"
     [project]
