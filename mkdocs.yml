@@ -135,6 +135,7 @@ nav:
   - Utilities:
     - Email Service: root/utilities/email-service.md
     - Cron Job with FastAPI Utils: root/utilities/cron-job.md
+    - Extract JSON Objects from Bulk Text: root/utilities/extract-json-from-text.md
   #     - Cosine Similarity Metric: metrics/cosine-similarity.md
   - DevOps: root/devops/index.md
   #     - Nginx Configuration: devops/nginx-config.md
