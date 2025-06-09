@@ -29,6 +29,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev pngquant
-      - run: pip install poetry  # Install Poetry
-      - run: poetry install       # Install dependencies from poetry.lock
-      - run: poetry run mkdocs gh-deploy --force  # Run mkdocs with Poetry
+      - run: pip install uv  # Install UV
+      - run: uv sync       # Install dependencies from uv.lock
+      - run: uv run mkdocs gh-deploy --force  # Run mkdocs with UV
