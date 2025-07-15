@@ -121,7 +121,7 @@ nav:
   - Environment:
     - Setup Packages:
       - Deep Learning:
-        - PyTorch with Poetry: root/environment/deep-learning/torch.md
+        - PyTorch: root/environment/deep-learning/torch.md
         - TensorFlow with Poetry: root/environment/deep-learning/tensorflow.md 
       # - OCR: 
       #   - PaddleOCR: root/environment/ocr/paddleocr.md
