@@ -123,6 +123,7 @@ nav:
       - Deep Learning:
         - PyTorch: root/environment/deep-learning/torch.md
         - TensorFlow with Poetry: root/environment/deep-learning/tensorflow.md 
+        - PaddlePaddle: root/environment/deep-learning/paddlepaddle.md
       # - OCR: 
       #   - PaddleOCR: root/environment/ocr/paddleocr.md
       #   - EasyOCR: root/environment/ocr/easyocr.md
