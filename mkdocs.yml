@@ -142,7 +142,11 @@ nav:
   #     - Nginx Configuration: devops/nginx-config.md
   #     - Docker Multi-Instance Setup: devops/docker-multi-instance.md
   #     - TCP Proxy for Database: devops/tcp-proxy.md
-  - Databases: root/databases/index.md
+  - Data Storage:
+    - Bucket:
+      - MinIO:
+        - Installation: root/data-storage/bucket/minio.md
+
   #     - Postgres TS Vector Script: databases/ts-vector.md
 
   # - User Guide:
