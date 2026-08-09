@@ -120,6 +120,8 @@ nav:
       - Pydantic: root/code-snippets/validation-patterns/pydantic.md
   - Environment:
     - Setup Packages:
+      - PyProject TOML:
+        - Unified CPU/GPU Dependency: root/environment/pyproject-toml/cpu-gpu.md
       - Deep Learning:
         - PyTorch: root/environment/deep-learning/torch.md
         - TensorFlow with Poetry: root/environment/deep-learning/tensorflow.md 
